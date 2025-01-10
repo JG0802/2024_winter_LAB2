@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Lotto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+        form {
+            display: block;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        form input[type="text"], form input[type="number"] {
+            margin: 10px 5px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            width: 120px;
+        }
+        form input[type="number"] {
+            margin: 10px 5px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            width: 70px;
+        }
+        form button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: #45a049;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 14px;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>로또 구매 페이지</h1>
+
+    {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+    {% endif %}
+
+    <!-- 직접 입력 -->
+    <form action="{% url 'buy_lotto' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="name" placeholder="이름 입력" required>
+        <input type="number" name="num1" min="1" max="45" placeholder="num" required>
+        <input type="number" name="num2" min="1" max="45" placeholder="num" required>
+        <input type="number" name="num3" min="1" max="45" placeholder="num" required>
+        <input type="number" name="num4" min="1" max="45" placeholder="num" required>
+        <input type="number" name="num5" min="1" max="45" placeholder="num" required>
+        <input type="number" name="num6" min="1" max="45" placeholder="num" required>
+        <button type="submit" name="manual_submit">수동 구매</button>
+        <p class="info">"1부터 45까지만 입력 가능합니다"</p>
+    </form>
+
+    <!-- 자동 생성 -->
+    <form action="{% url 'buy_lotto' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="auto_generate" value="true">
+        <input type="text" name="name" placeholder="이름 입력" required>
+        <button type="submit">자동 구매</button>
+    </form>
+</body>
+</html>

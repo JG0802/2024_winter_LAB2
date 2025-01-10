@@ -1,0 +1,24 @@
+# 1. Python 베이스 이미지
+FROM python:3.9-slim
+
+# 2. 작업 디렉토리 설정
+WORKDIR /app
+
+# 3. 종속성 설치
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 4. 프로젝트 파일 복사
+COPY . .
+
+# 5. 정적 파일 수집
+RUN python manage.py collectstatic --noinput
+
+# 6. 정적 파일 디렉토리 생성 (이미 있을 경우 생략 가능)
+RUN mkdir -p /app/staticfiles
+
+# 7. Django 애플리케이션 실행 (개발용)
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+# 프로덕션 환경용 예시 (주석 처리):
+# CMD ["gunicorn", "--bind", "0.0.0.0:8000", "lotto_service.wsgi:application"]

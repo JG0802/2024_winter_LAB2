@@ -1,0 +1,24 @@
+{% extends "admin/change_list.html" %}
+
+{% block object-tools %}
+    {% if not object_list %}
+        <!-- 추첨 버튼 표시 -->
+        <form method="post" action="{% url 'admin:lotto_winningnumber_changelist' %}">
+            {% csrf_token %}
+            <input type="hidden" name="draw" value="true">
+            <button style="padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;" onmouseover="this.style.backgroundColor='#45a049';"
+            onmouseout="this.style.backgroundColor='#4CAF50';" type="submit" class="button">당첨번호 추첨</button>
+        </form>
+    {% else %}
+        <!-- 당첨 번호가 이미 존재할 때 -->
+        <p>이미 당첨 번호가 존재합니다. 새로운 번호를 생성할 수 없습니다.</p>
+    {% endif %}
+{% endblock %}

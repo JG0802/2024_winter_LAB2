@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Lotto Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .info-box p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        .info-box h2 {
+            font-size: 20px;
+            margin-top: 20px;
+            color: #4CAF50;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>구매하신 로또 티켓</h1>
+
+    <div class="info-box">
+        <p><strong>사용자 이름 :</strong> {{ ticket.name }}</p>
+        <p><strong>제출하신 로또 번호 :</strong> {{ ticket.numbers }}</p>
+        <p><strong>당첨 여부 :</strong> {{ match_status }}</p>
+
+        {% if winning_number %}
+            <h2>로또 당첨 번호 : {{ winning_number.numbers }}</h2>
+        {% else %}
+            <p style="color: gray;">아직 로또 당첨 번호가 추첨되지 않았습니다.</p>
+        {% endif %}
+    </div>
+
+    <!-- 초기 화면으로 돌아가기 버튼 -->
+    <a href="{% url 'home' %}">
+        <button>홈페이지로 돌아가기</button>
+    </a>
+</body>
+</html>

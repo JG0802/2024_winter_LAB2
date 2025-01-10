@@ -1,0 +1,11 @@
+# Django 웹 프레임워크
+django>=3.2
+
+# Gunicorn: 프로덕션 환경 WSGI 서버
+gunicorn
+
+# PostgreSQL 드라이버 (필요한 경우)
+psycopg2-binary
+
+# 개발용 디버깅 도구 (선택 사항)
+django-debug-toolbar
