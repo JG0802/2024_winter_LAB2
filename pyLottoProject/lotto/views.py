@@ -57,7 +57,7 @@ def results_user(request, name):
             elif match_count == 4:
                 match_status = "3등"
             elif match_count == 3:
-                match_status = "5등"
+                match_status = "4등"
             else:
                 match_status = "미당첨"
         except ValueError:
